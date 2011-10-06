@@ -53,7 +53,7 @@ public class NextBuildNumberAction implements Action {
 
     public String getIconFileName() {
         if ( job.getACL().hasPermission( getPermission() )) {
-            return "next.gif";
+            return "next.png";
         }
 
         return null;
