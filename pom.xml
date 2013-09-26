@@ -33,9 +33,9 @@ THE SOFTWARE.
   <artifactId>next-build-number</artifactId>
   <version>1.1-SNAPSHOT</version>
   <packaging>hpi</packaging>
-  <name>Hudson Next Build Number Plugin</name>
+  <name>Next Build Number Plugin</name>
   <url>https://wiki.jenkins-ci.org/display/JENKINS/Next+Build+Number+Plugin</url>
-  <description>Sets the build number Hudson will use for a job's next build</description>
+  <description>Sets the build number Jenkins will use for a job's next build</description>
 
   <properties>
     <maven.test.skip>true</maven.test.skip><!-- see pom-for-test.xml -->
