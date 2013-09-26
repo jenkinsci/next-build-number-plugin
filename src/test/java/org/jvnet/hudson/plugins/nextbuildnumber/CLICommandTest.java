@@ -24,8 +24,11 @@
 
 package org.jvnet.hudson.plugins.nextbuildnumber;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.text.IsEmptyString.isEmptyString;
+import hudson.cli.CLICommandInvoker;
 import hudson.model.FreeStyleBuild;
 import hudson.model.Item;
 import hudson.model.FreeStyleProject;
