@@ -31,7 +31,7 @@ THE SOFTWARE.
   </parent>
 
   <artifactId>next-build-number</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.1</version>
   <packaging>hpi</packaging>
   <name>Next Build Number Plugin</name>
   <url>https://wiki.jenkins-ci.org/display/JENKINS/Next+Build+Number+Plugin</url>
