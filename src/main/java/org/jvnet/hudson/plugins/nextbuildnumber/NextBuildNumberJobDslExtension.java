@@ -31,7 +31,7 @@ public class NextBuildNumberJobDslExtension extends ContextExtensionPoint {
 
     @DslExtensionMethod(context = TriggerContext.class)
     public Object nextBuildNumber(int nextBuildNumber) {
-        LOG.fine("Saved next build number as " + nextBuildNumber);
+        LOG.fine(getClass().getSimpleName() + ": Saved next build number as " + nextBuildNumber);
         return new NextBuildNumberTrigger(nextBuildNumber);
     }
 }

@@ -31,7 +31,7 @@ public class NextBuildNumberTrigger extends Trigger {
             return; //this trigger only makes sense in the context of a Job DSL run, beyond that it is useless.
         }
         if (project instanceof Job) {
-            LOG.info(String.format("Setting nextBuildNumber=%d for project %s", nextBuildNumber, project.getFullDisplayName()));
+            LOG.fine(String.format("%s: Setting nextBuildNumber=%d for project %s", getClass().getSimpleName(), nextBuildNumber, project.getFullDisplayName()));
             try {
                 ((Job) project).updateNextBuildNumber(nextBuildNumber);
             } catch (IOException e) {
