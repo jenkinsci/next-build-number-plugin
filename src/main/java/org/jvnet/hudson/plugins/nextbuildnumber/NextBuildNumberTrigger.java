@@ -7,6 +7,7 @@ import hudson.model.JobPropertyDescriptor;
 import hudson.tasks.BuildWrapper;
 import hudson.triggers.Trigger;
 import hudson.triggers.TriggerDescriptor;
+import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -21,6 +22,7 @@ public class NextBuildNumberTrigger extends Trigger {
 
     private final int nextBuildNumber;
 
+    @DataBoundConstructor
     public NextBuildNumberTrigger(int nextBuildNumber) {
         this.nextBuildNumber = nextBuildNumber;
     }
