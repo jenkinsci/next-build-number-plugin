@@ -7,7 +7,7 @@ separate pom until the plugin itself starts to depend on newer version.
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.645</version>
+    <version>1.466</version>
   </parent>
 
   <artifactId>next-build-number</artifactId>
@@ -54,7 +54,7 @@ separate pom until the plugin itself starts to depend on newer version.
     <dependency>
       <groupId>org.jenkins-ci.main</groupId>
       <artifactId>jenkins-test-harness</artifactId>
-      <version>1.644</version>
+      <version>1.526</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
