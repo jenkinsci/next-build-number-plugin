@@ -25,10 +25,8 @@
 package org.jvnet.hudson.plugins.nextbuildnumber;
 
 import hudson.Extension;
-import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.Job;
-import hudson.model.TransientProjectActionFactory;
 
 import hudson.security.Permission;
 import java.io.IOException;
@@ -36,6 +34,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.servlet.ServletException;
+
+import jenkins.model.TransientActionFactory;
 
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -89,14 +89,18 @@ public class NextBuildNumberAction implements Action {
     }
 
     @Extension
-    public static class ActionInjector extends TransientProjectActionFactory {
+    public static class ActionInjector extends TransientActionFactory<Job> {
         @Override
-        public Collection<NextBuildNumberAction> createFor(AbstractProject p) {
+        public Collection<NextBuildNumberAction> createFor(Job p) {
             ArrayList<NextBuildNumberAction> list = new ArrayList<NextBuildNumberAction>();
 
             list.add( new NextBuildNumberAction(p));
 
             return list;
-        }        
+        }
+        @Override
+        public Class type() {
+            return Job.class;
+        }
     }
 }
