@@ -27,7 +27,7 @@ THE SOFTWARE.
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.609.1</version>
+    <version>2.30</version>
   </parent>
 
   <artifactId>next-build-number</artifactId>
@@ -61,6 +61,11 @@ THE SOFTWARE.
       <artifactId>job-dsl</artifactId>
       <version>1.41</version>
       <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>branch-api</artifactId>
+      <version>2.0.11</version>
     </dependency>
   </dependencies>
 

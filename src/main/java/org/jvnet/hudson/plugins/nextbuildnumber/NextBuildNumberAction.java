@@ -24,19 +24,17 @@
 
 package org.jvnet.hudson.plugins.nextbuildnumber;
 
-import hudson.Extension;
-import hudson.model.Action;
-import hudson.model.Job;
-
-import hudson.security.Permission;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.servlet.ServletException;
 
+import hudson.Extension;
+import hudson.model.Action;
+import hudson.model.Job;
+import hudson.security.Permission;
+import jenkins.branch.MultiBranchProject;
 import jenkins.model.TransientActionFactory;
-
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -52,11 +50,27 @@ public class NextBuildNumberAction implements Action {
     }
 
     public String getIconFileName() {
-        if ( job.getACL().hasPermission( getPermission() )) {
+        if (hasPermission(job)) {
             return "next.png";
         }
 
         return null;
+    }
+
+    public boolean hasPermission(Job job) {
+        if (job.getParent() instanceof jenkins.branch.MultiBranchProject) {
+            return ((MultiBranchProject) job.getParent()).getACL().hasPermission(getPermission());
+        } else {
+            return job.getACL().hasPermission(getPermission());
+        }
+    }
+
+    private void checkPermission(Job job) {
+        if (job.getParent() instanceof jenkins.branch.MultiBranchProject) {
+            ((MultiBranchProject) job.getParent()).getACL().checkPermission(getPermission());
+        } else {
+            job.getACL().checkPermission(getPermission());
+        }
     }
 
     public String getDisplayName() {
@@ -76,7 +90,7 @@ public class NextBuildNumberAction implements Action {
     }
 
     public synchronized void doSubmit( StaplerRequest req, StaplerResponse resp ) throws IOException, ServletException {
-        job.getACL().checkPermission( getPermission() );
+        checkPermission(job);
 
         try {
             int buildNumber = Integer.parseInt( req.getParameter("nextBuildNumber"));
