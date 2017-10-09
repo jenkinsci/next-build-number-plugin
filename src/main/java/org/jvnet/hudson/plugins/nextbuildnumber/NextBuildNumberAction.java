@@ -74,7 +74,7 @@ public class NextBuildNumberAction implements Action {
     }
 
     public String getDisplayName() {
-        return Messages.DisplayName();
+        return Messages.displayName();
     }
 
     public String getUrlName() {
