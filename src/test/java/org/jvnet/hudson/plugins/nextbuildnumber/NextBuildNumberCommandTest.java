@@ -39,7 +39,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.jvnet.hudson.test.JenkinsRule;
 
-public class CLICommandTest {
+public class NextBuildNumberCommandTest {
 
     private CLICommandInvoker command;
 
@@ -47,7 +47,7 @@ public class CLICommandTest {
 
     @Before public void setUp() {
 
-        command = new CLICommandInvoker(j, new CLICommand());
+        command = new CLICommandInvoker(j, new NextBuildNumberCommand());
     }
 
     @Test public void updateShouldFailIfJobDoesNotExist() {
@@ -88,7 +88,7 @@ public class CLICommandTest {
         ;
 
         assertThat("No output expected", result.stdout(), isEmptyString());
-        assertThat("Command is expected to fail", result.returnCode(), equalTo(CLICommand.INVALID_NEXT_BUILD_NUMBER));
+        assertThat("Command is expected to fail", result.returnCode(), equalTo(NextBuildNumberCommand.INVALID_NEXT_BUILD_NUMBER));
         assertThat(result.stderr(), containsString("Provided build number 42 is less than last build number 43"));
         assertThat("Build number has not changed", project.getNextBuildNumber(), equalTo(43));
     }

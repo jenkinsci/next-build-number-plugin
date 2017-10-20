@@ -23,20 +23,19 @@
  */
 package org.jvnet.hudson.plugins.nextbuildnumber;
 
-import hudson.Extension;
-import hudson.model.Item;
-import hudson.model.TopLevelItem;
-import hudson.model.Job;
-
 import java.io.IOException;
 
+import hudson.Extension;
+import hudson.model.Item;
+import hudson.model.Job;
+import hudson.model.TopLevelItem;
 import org.kohsuke.args4j.Argument;
 
 /**
  * @author ogondza
  */
 @Extension
-public class CLICommand extends hudson.cli.CLICommand {
+public class NextBuildNumberCommand extends hudson.cli.CLICommand {
 
     /*package*/ static final int INVALID_NEXT_BUILD_NUMBER = -2;
 
@@ -49,7 +48,7 @@ public class CLICommand extends hudson.cli.CLICommand {
     @Override
     public String getShortDescription() {
 
-        return Messages.CLIDescription();
+        return Messages.cliDescription();
     }
 
     @Override
@@ -69,7 +68,7 @@ public class CLICommand extends hudson.cli.CLICommand {
 
         if (job.getNextBuildNumber() == number) return 0;
 
-        stderr.println(Messages.InvalidBuildNumber(
+        stderr.println(Messages.invalidBuildNumber(
                 Integer.toString(number),
                 Integer.toString(job.getNextBuildNumber())
         ));
