@@ -39,7 +39,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.jvnet.hudson.test.JenkinsRule;
 
-public class NextBuildNumberCommandTest {
+public class CommandTest {
 
     private CLICommandInvoker command;
 
