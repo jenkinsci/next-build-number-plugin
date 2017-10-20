@@ -2,7 +2,6 @@ package org.jvnet.hudson.plugins.nextbuildnumber;
 
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import hudson.model.AbstractProject;
 import hudson.model.Job;
 import hudson.security.AuthorizationStrategy;
 import org.junit.Before;
