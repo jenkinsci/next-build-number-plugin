@@ -59,7 +59,7 @@ public class CommandTest {
 
         assertThat(result.stderr(), containsString("No such job 'project'"));
         assertThat("No output expected", result.stdout(), isEmptyString());
-        assertThat("Command is expected to fail", result.returnCode(), equalTo(-1));
+        assertThat("Command is expected to fail", result.returnCode(), equalTo(3));
     }
 
     @Test public void updateShouldFailWithoutJobConfigurePermission() throws Exception {
@@ -73,7 +73,7 @@ public class CommandTest {
 
         assertThat(result.stderr(), containsString("user is missing the Job/Configure permission"));
         assertThat("No output expected", result.stdout(), isEmptyString());
-        assertThat("Command is expected to fail", result.returnCode(), equalTo(-1));
+        assertThat("Command is expected to fail", result.returnCode(), equalTo(6));
     }
 
     @Test public void updateShouldFailIfNewNumberIsLessThanTheOldOne() throws Exception {
