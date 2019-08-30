@@ -16,7 +16,7 @@ public class JobTest extends JobTestBase {
     @Test
     public void testFreeStyleProject() throws Exception {
         FreeStyleProject project = jenkins.createFreeStyleProject("jobTest");
-        Build build = project.scheduleBuild2(0).get();
+        Build<?,?> build = project.scheduleBuild2(0).get();
         assertEquals(1, build.getNumber());
 
         performNextBuildNumberChange(project, "2","222");

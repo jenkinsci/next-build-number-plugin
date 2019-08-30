@@ -1,7 +1,6 @@
 package org.jvnet.hudson.plugins.nextbuildnumber;
 
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import hudson.model.Job;
 import hudson.security.AuthorizationStrategy;
 import org.junit.Before;
@@ -20,11 +19,12 @@ public class JobTestBase {
         jenkins.getInstance().setAuthorizationStrategy(new AuthorizationStrategy.Unsecured());
     }
 
+    @SuppressWarnings("rawtypes")
     protected void performNextBuildNumberChange(Job project, String currenNumber, String changeToNumber) throws Exception {
         HtmlForm form = jenkins.createWebClient().getPage(project, "nextbuildnumber").getFormByName("nextbuildnumber");
         assertEquals(currenNumber, form.getInputByName("nextBuildNumber").getDefaultValue());
         form.getInputByName("nextBuildNumber").setValueAttribute(changeToNumber);
-        HtmlPage submitResult = jenkins.submit(form);
+        jenkins.submit(form);
 
         form = jenkins.createWebClient().getPage(project, "nextbuildnumber").getFormByName("nextbuildnumber");
         assertEquals(changeToNumber, form.getInputByName("nextBuildNumber").getDefaultValue());
