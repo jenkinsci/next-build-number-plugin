@@ -25,9 +25,12 @@
 package org.jvnet.hudson.plugins.nextbuildnumber;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+
 import javax.servlet.ServletException;
+
+import com.cloudbees.hudson.plugins.folder.computed.ComputedFolder;
 
 import hudson.Extension;
 import hudson.model.Action;
@@ -42,6 +45,7 @@ import org.kohsuke.stapler.StaplerResponse;
  *
  * @author dty
  */
+@SuppressWarnings("rawtypes")
 public class NextBuildNumberAction implements Action {
     private final Job job;
 
@@ -53,21 +57,34 @@ public class NextBuildNumberAction implements Action {
         if (hasPermission(job)) {
             return "next.png";
         }
-
         return null;
     }
 
     public boolean hasPermission(Job job) {
-        if (job.getParent() instanceof jenkins.branch.MultiBranchProject) {
-            return ((MultiBranchProject) job.getParent()).getACL().hasPermission(getPermission());
+        if (job.getParent() instanceof MultiBranchProject) {
+            MultiBranchProject parentProject = (MultiBranchProject) job.getParent();
+            boolean hasPermission = parentProject.getACL().hasPermission(getPermission());
+            if (!hasPermission && parentProject.getParent() instanceof ComputedFolder) {
+                hasPermission = ((ComputedFolder) parentProject.getParent()).getACL().hasPermission(getPermission());
+            }
+            return hasPermission;
         } else {
             return job.getACL().hasPermission(getPermission());
         }
     }
 
     private void checkPermission(Job job) {
-        if (job.getParent() instanceof jenkins.branch.MultiBranchProject) {
-            ((MultiBranchProject) job.getParent()).getACL().checkPermission(getPermission());
+        if (job.getParent() instanceof MultiBranchProject) {
+            MultiBranchProject parentProject = (MultiBranchProject) job.getParent();
+            try {
+                parentProject.getACL().checkPermission(getPermission());
+            } catch (org.acegisecurity.AccessDeniedException e) {
+                if (parentProject.getParent() instanceof ComputedFolder) {
+                    ((ComputedFolder) parentProject.getParent()).getACL().checkPermission(getPermission());
+                } else {
+                    throw e;
+                }
+            }
         } else {
             job.getACL().checkPermission(getPermission());
         }
@@ -106,14 +123,10 @@ public class NextBuildNumberAction implements Action {
     public static class ActionInjector extends TransientActionFactory<Job> {
         @Override
         public Collection<NextBuildNumberAction> createFor(Job p) {
-            ArrayList<NextBuildNumberAction> list = new ArrayList<NextBuildNumberAction>();
-
-            list.add( new NextBuildNumberAction(p));
-
-            return list;
+            return Collections.singleton(new NextBuildNumberAction(p));
         }
         @Override
-        public Class type() {
+        public Class<Job> type() {
             return Job.class;
         }
     }
