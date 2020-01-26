@@ -7,7 +7,7 @@
     </parent>
 
     <artifactId>next-build-number</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <version>${revision}${changelist}</version>
     <packaging>hpi</packaging>
     <name>Next Build Number Plugin</name>
     <url>https://github.com/jenkinsci/next-build-number-plugin</url>
@@ -21,6 +21,8 @@
     </licenses>
 
     <properties>
+        <revision>1.6</revision>
+        <changelist>-SNAPSHOT</changelist>
         <jenkins.version>2.107.3</jenkins.version>
         <java.level>8</java.level>
     </properties>
@@ -29,7 +31,7 @@
         <connection>scm:git:git://github.com/jenkinsci/next-build-number-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:jenkinsci/next-build-number-plugin.git</developerConnection>
         <url>https://github.com/jenkinsci/next-build-number-plugin</url>
-        <tag>HEAD</tag>
+        <tag>${scmTag}</tag>
     </scm>
 
     <developers>
