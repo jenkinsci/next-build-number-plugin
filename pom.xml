@@ -10,7 +10,7 @@
     <version>1.6-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <name>Next Build Number Plugin</name>
-    <url>https://wiki.jenkins-ci.org/display/JENKINS/Next+Build+Number+Plugin</url>
+    <url>https://github.com/jenkinsci/next-build-number-plugin</url>
     <description>Sets the build number Jenkins will use for a job's next build</description>
 
     <licenses>
