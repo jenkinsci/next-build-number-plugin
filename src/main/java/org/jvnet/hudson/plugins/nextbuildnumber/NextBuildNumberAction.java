@@ -78,8 +78,8 @@ public class NextBuildNumberAction implements Action {
             MultiBranchProject parentProject = (MultiBranchProject) job.getParent();
             try {
                 parentProject.getACL().checkPermission(getPermission());
-            } catch (Exception e) {
-                if (e.getClass().getName().contains("AccessDeniedException") && parentProject.getParent() instanceof ComputedFolder) {
+            } catch (org.acegisecurity.AccessDeniedException|org.springframework.security.access.AccessDeniedException e) {
+                if (parentProject.getParent() instanceof ComputedFolder) {
                     ((ComputedFolder) parentProject.getParent()).getACL().checkPermission(getPermission());
                 } else {
                     throw e;
