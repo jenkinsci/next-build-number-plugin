@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>3.49</version>
+        <version>4.25</version>
     </parent>
 
     <artifactId>next-build-number</artifactId>
@@ -21,9 +21,9 @@
     </licenses>
 
     <properties>
-        <revision>1.6</revision>
+        <revision>1.7</revision>
         <changelist>-SNAPSHOT</changelist>
-        <jenkins.version>2.107.3</jenkins.version>
+        <jenkins.version>2.266</jenkins.version>
         <java.level>8</java.level>
     </properties>
 
@@ -45,7 +45,7 @@
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>job-dsl</artifactId>
-            <version>1.68</version>
+            <version>1.77</version>
             <optional>true</optional>
         </dependency>
         <dependency>
