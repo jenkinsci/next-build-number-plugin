@@ -6,7 +6,7 @@
 
 This is a simple plugin that changes the next build number Jenkins will
 use for a job.  
-This plugin is typically useful if you are using the build number as
+This plugin is typically useful if you are using `$BUILD_NUMBER` as
 part of a version string, and:
 
 -   You do a build outside of Jenkins and you want to skip that number
@@ -14,11 +14,13 @@ part of a version string, and:
 -   You created a new job to handle an existing process and want it to
     continue from where the old one left off.
 
-Jenkins requires that **build numbers are always increasing**. When you
+Jenkins requires that **build numbers are not duplicated**. When you
 click on the link installed by this plugin, a text field will be shown
 that contains the next build number to be used. You can change this
-number to be anything larger than the value for the previous build.
-**Changing this to a smaller number will do nothing**.
+number to be anything larger than the value **for the most recent build**
+
+Note: **Changing this to a number lower than the latest build number will do nothing**.
+You can, however, go back to a previously used number if you delete builds. 
 
 The value can be changed:
 
@@ -27,7 +29,7 @@ The value can be changed:
 -   Via the CLI using the `set-next-build-number` command (Requires \>=
     v1.1)
 -   Programmatically via the **Job DSL** plugin
-    (see [usage](#NextBuildNumberPlugin-JobDSL)). (Requires \>= v1.3 of
+    (see [usage](#Job DSL)). (Requires \>= v1.3 of
     this plugin and Job DSL \>= 1.41)
 
 Manual Usage:
@@ -51,9 +53,13 @@ job('example') {
 
 ## Changelog
 
+### Version 1.7
+
+- Fix multibranch job support in Jenkins \>= 2.266 (Thanks [eoc-ross](https://github.com/jenkinsci/next-build-number-plugin/pull/10)!)
+
 ### Version 1.6
 
-- Support more job types (Organization Folders) (Thanks [res0nance](https://github.com/jenkinsci/next-build-number-plugin/pull/7)!)
+- Support more job types (Organization Folders) (Thanks [res0nance](https://github.com/jenkinsci/next-build-number-plugin/pull/7)!)
 
 ### Version 1.5
 
