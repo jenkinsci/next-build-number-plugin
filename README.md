@@ -1,7 +1,7 @@
 # Next Build Number Plugin
 
 [![Jenkins Plugin](https://img.shields.io/jenkins/plugin/v/next-build-number)](https://plugins.jenkins.io/next-build-number)
-[![Changelog](https://img.shields.io/github/v/tag/jenkinsci/next-build-number-plugin?label=changelog)](https://github.com/jenkinsci/next-build-number/blob/master/README.md)
+[![Changelog](https://img.shields.io/github/v/tag/jenkinsci/next-build-number-plugin?label=changelog)](https://github.com/jenkinsci/next-build-number-plugin/blob/master/README.md#changelog)
 [![Jenkins Plugin Installs](https://img.shields.io/jenkins/plugin/i/next-build-number?color=blue)](https://plugins.jenkins.io/next-build-number)
 
 This is a simple plugin that changes the next build number Jenkins will
@@ -52,6 +52,10 @@ job('example') {
 ```
 
 ## Changelog
+
+### Version 1.8
+
+- Prevent non-numeric input when setting next build number interactively (Thanks [NotMyFault](https://github.com/jenkinsci/next-build-number-plugin/pull/11)!)
 
 ### Version 1.7
 
