@@ -23,7 +23,7 @@
     <properties>
         <revision>1.9</revision>
         <changelist>-SNAPSHOT</changelist>
-        <jenkins.version>2.387.4</jenkins.version>
+        <jenkins.version>2.387.3</jenkins.version>
     </properties>
 
     <scm>
