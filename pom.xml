@@ -26,7 +26,7 @@
     </properties>
 
     <scm>
-        <connection>scm:git:git://github.com/jenkinsci/next-build-number-plugin.git</connection>
+        <connection>scm:git:https://github.com/jenkinsci/next-build-number-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:jenkinsci/next-build-number-plugin.git</developerConnection>
         <url>https://github.com/jenkinsci/next-build-number-plugin</url>
         <tag>${scmTag}</tag>
@@ -84,7 +84,7 @@
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>script-security</artifactId>
-            <version>1175.v4b_d517d6db_f0</version>
+            <version>1229.v4880b_b_e905a_6</version>
             <scope>test</scope>
             <optional>true</optional>
         </dependency>
