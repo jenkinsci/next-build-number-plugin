@@ -24,7 +24,7 @@ public class JobTestBase {
         HtmlForm form;
         form = jenkins.createWebClient().getPage(project, "nextbuildnumber").getFormByName("nextbuildnumber");
         assertEquals(currenNumber, form.getInputByName("nextBuildNumber").getDefaultValue());
-        form.getInputByName("nextBuildNumber").setValueAttribute(changeToNumber);
+        form.getInputByName("nextBuildNumber").setValue(changeToNumber);
         jenkins.submit(form);
 
         form = jenkins.createWebClient().getPage(project, "nextbuildnumber").getFormByName("nextbuildnumber");
