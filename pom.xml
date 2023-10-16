@@ -11,7 +11,6 @@
     <packaging>hpi</packaging>
     <name>Next Build Number Plugin</name>
     <url>https://github.com/jenkinsci/next-build-number-plugin</url>
-    <description>Sets the build number Jenkins will use for a job's next build</description>
 
     <licenses>
         <license>
