@@ -88,6 +88,12 @@
             <scope>test</scope>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.main</groupId>
+            <artifactId>jenkins-test-harness-htmlunit</artifactId>
+            <version>154.v973ee207a_b_95</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
