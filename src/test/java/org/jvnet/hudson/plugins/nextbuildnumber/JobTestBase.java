@@ -21,8 +21,7 @@ public class JobTestBase {
 
     @SuppressWarnings("rawtypes")
     protected void performNextBuildNumberChange(Job project, String currenNumber, String changeToNumber) throws Exception {
-        HtmlForm form;
-        form = jenkins.createWebClient().getPage(project, "nextbuildnumber").getFormByName("nextbuildnumber");
+        HtmlForm form = jenkins.createWebClient().getPage(project, "nextbuildnumber").getFormByName("nextbuildnumber");
         assertEquals(currenNumber, form.getInputByName("nextBuildNumber").getDefaultValue());
         form.getInputByName("nextBuildNumber").setValue(changeToNumber);
         jenkins.submit(form);
