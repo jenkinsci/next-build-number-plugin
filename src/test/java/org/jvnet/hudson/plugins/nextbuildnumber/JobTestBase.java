@@ -1,8 +1,8 @@
 package org.jvnet.hudson.plugins.nextbuildnumber;
 
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import hudson.model.Job;
 import hudson.security.AuthorizationStrategy;
+import org.htmlunit.html.HtmlForm;
 import org.junit.Before;
 import org.junit.Rule;
 import org.jvnet.hudson.test.JenkinsRule;
@@ -23,7 +23,7 @@ public class JobTestBase {
     protected void performNextBuildNumberChange(Job project, String currenNumber, String changeToNumber) throws Exception {
         HtmlForm form = jenkins.createWebClient().getPage(project, "nextbuildnumber").getFormByName("nextbuildnumber");
         assertEquals(currenNumber, form.getInputByName("nextBuildNumber").getDefaultValue());
-        form.getInputByName("nextBuildNumber").setValueAttribute(changeToNumber);
+        form.getInputByName("nextBuildNumber").setValue(changeToNumber);
         jenkins.submit(form);
 
         form = jenkins.createWebClient().getPage(project, "nextbuildnumber").getFormByName("nextbuildnumber");
