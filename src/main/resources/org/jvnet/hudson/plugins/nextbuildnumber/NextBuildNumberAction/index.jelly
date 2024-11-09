@@ -28,8 +28,9 @@ THE SOFTWARE.
     <l:main-panel>
      <j:if test="${it.hasPermission(it.job)}">
       <form action="submit" method="post" name="nextbuildnumber">
-        ${%Next Build Number:} <input type="number" name="nextBuildNumber" value="${it.job.nextBuildNumber}"
-               style="width:100%" id="nextBuildNumber" />
+          <f:entry title="${%Next Build Number}">
+              <f:number name="nextBuildNumber" field="nextBuildNumber" default="${it.job.nextBuildNumber}"/>
+          </f:entry>
         <f:submit value="${%Submit}"/>
       </form>
       </j:if>

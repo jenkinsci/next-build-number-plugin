@@ -38,6 +38,7 @@ import hudson.model.Job;
 import hudson.security.Permission;
 import jenkins.branch.MultiBranchProject;
 import jenkins.model.TransientActionFactory;
+import net.sf.json.JSONException;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -53,9 +54,10 @@ public class NextBuildNumberAction implements Action {
         this.job = job;
     }
 
+    @Override
     public String getIconFileName() {
         if (hasPermission(job)) {
-            return "next.png";
+            return "symbol-arrow-forward-outline plugin-ionicons-api";
         }
         return null;
     }
@@ -108,13 +110,12 @@ public class NextBuildNumberAction implements Action {
 
     public synchronized void doSubmit( StaplerRequest req, StaplerResponse resp ) throws IOException, ServletException {
         checkPermission(job);
-
         try {
-            int buildNumber = Integer.parseInt( req.getParameter("nextBuildNumber"));
+            int buildNumber = req.getSubmittedForm().getInt("nextBuildNumber");
             job.updateNextBuildNumber( buildNumber );
             resp.sendRedirect2( job.getAbsoluteUrl() );
         }
-        catch ( NumberFormatException e ) {
+        catch (JSONException e) {
             throw new ServletException( "Build number must be an integer", e );
         }
     }
