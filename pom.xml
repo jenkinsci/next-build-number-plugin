@@ -23,7 +23,8 @@
     <properties>
         <revision>1.9</revision>
         <changelist>-SNAPSHOT</changelist>
-        <jenkins.version>2.440.3</jenkins.version>
+        <jenkins.baseline>2.452</jenkins.baseline>
+        <jenkins.version>${jenkins.baseline}.4</jenkins.version>
     </properties>
 
     <scm>
@@ -44,8 +45,8 @@
         <dependencies>
             <dependency>
                 <groupId>io.jenkins.tools.bom</groupId>
-                <artifactId>bom-2.440.x</artifactId>
-                <version>3234.v5ca_5154341ef</version>
+                <artifactId>bom-${jenkins.baseline}.x</artifactId>
+                <version>3654.v237e4a_f2d8da_</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -56,14 +57,16 @@
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>job-dsl</artifactId>
-            <version>1.84</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>branch-api</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>io.jenkins.plugins</groupId>
+            <artifactId>ionicons-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>matrix-project</artifactId>
