@@ -8,7 +8,7 @@
     </parent>
 
     <artifactId>next-build-number</artifactId>
-    <version>${revision}${changelist}</version>
+    <version>${changelist}</version>
     <packaging>hpi</packaging>
     <name>Next Build Number Plugin</name>
     <url>https://github.com/jenkinsci/next-build-number-plugin</url>
@@ -21,8 +21,7 @@
     </licenses>
 
     <properties>
-        <revision>1.9</revision>
-        <changelist>-SNAPSHOT</changelist>
+        <changelist>999999-SNAPSHOT</changelist>
         <jenkins.baseline>2.452</jenkins.baseline>
         <jenkins.version>${jenkins.baseline}.4</jenkins.version>
     </properties>
