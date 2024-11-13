@@ -80,3 +80,4 @@ job('example') {
 ### Version 1.1
 
 - Add CLI command ([JENKINS-14406](https://issues.jenkins-ci.org/browse/JENKINS-14406))
+
