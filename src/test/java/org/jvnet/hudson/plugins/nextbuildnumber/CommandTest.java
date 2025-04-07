@@ -24,87 +24,86 @@
 
 package org.jvnet.hudson.plugins.nextbuildnumber;
 
+import hudson.cli.CLICommandInvoker;
+import hudson.model.FreeStyleBuild;
+import hudson.model.FreeStyleProject;
+import hudson.model.Item;
+import jenkins.model.Jenkins;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.jvnet.hudson.test.JenkinsRule;
+import org.jvnet.hudson.test.junit.jupiter.WithJenkins;
+
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.text.IsEmptyString.isEmptyString;
-import hudson.cli.CLICommandInvoker;
-import hudson.model.FreeStyleBuild;
-import hudson.model.Item;
-import hudson.model.FreeStyleProject;
-import jenkins.model.Jenkins;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.text.IsEmptyString.emptyString;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.jvnet.hudson.test.JenkinsRule;
-
-public class CommandTest {
+@WithJenkins
+class CommandTest {
 
     private CLICommandInvoker command;
 
-    @Rule public final JenkinsRule j = new JenkinsRule();
+    private JenkinsRule j;
 
-    @Before public void setUp() {
-
+    @BeforeEach
+    void setUp(JenkinsRule rule) {
+        j = rule;
         command = new CLICommandInvoker(j, new NextBuildNumberCommand());
     }
 
-    @Test public void updateShouldFailIfJobDoesNotExist() {
-
+    @Test
+    void updateShouldFailIfJobDoesNotExist() {
         final CLICommandInvoker.Result result = command
                 .authorizedTo(Jenkins.READ, Item.READ, Item.CONFIGURE)
-                .invokeWithArgs("project", "42")
-        ;
+                .invokeWithArgs("project", "42");
 
         assertThat(result.stderr(), containsString("No such job 'project'"));
-        assertThat("No output expected", result.stdout(), isEmptyString());
+        assertThat("No output expected", result.stdout(), is(emptyString()));
         assertThat("Command is expected to fail", result.returnCode(), equalTo(3));
     }
 
-    @Test public void updateShouldFailWithoutJobConfigurePermission() throws Exception {
-
+    @Test
+    void updateShouldFailWithoutJobConfigurePermission() throws Exception {
         j.createFreeStyleProject("project");
 
         final CLICommandInvoker.Result result = command
                 .authorizedTo(Jenkins.READ, Item.READ)
-                .invokeWithArgs("project", "42")
-        ;
+                .invokeWithArgs("project", "42");
 
         assertThat(result.stderr(), containsString("user is missing the Job/Configure permission"));
-        assertThat("No output expected", result.stdout(), isEmptyString());
+        assertThat("No output expected", result.stdout(), is(emptyString()));
         assertThat("Command is expected to fail", result.returnCode(), equalTo(6));
     }
 
-    @Test public void updateShouldFailIfNewNumberIsLessThanTheOldOne() throws Exception {
-
+    @Test
+    void updateShouldFailIfNewNumberIsLessThanTheOldOne() throws Exception {
         FreeStyleProject project = j.createFreeStyleProject("project");
         project.updateNextBuildNumber(42);
         project.scheduleBuild2(0).get(); // Next number is 43 now
 
         final CLICommandInvoker.Result result = command
                 .authorizedTo(Jenkins.READ, Item.READ, Item.CONFIGURE)
-                .invokeWithArgs("project", "42")
-        ;
+                .invokeWithArgs("project", "42");
 
-        assertThat("No output expected", result.stdout(), isEmptyString());
+        assertThat("No output expected", result.stdout(), is(emptyString()));
         assertThat("Command is expected to fail", result.returnCode(), equalTo(NextBuildNumberCommand.INVALID_NEXT_BUILD_NUMBER));
         assertThat(result.stderr(), containsString("Provided build number 42 is less than last build number 43"));
         assertThat("Build number has not changed", project.getNextBuildNumber(), equalTo(43));
     }
 
-    @Test public void updateShouldBumpTheNextBuildNumber() throws Exception {
-
+    @Test
+    void updateShouldBumpTheNextBuildNumber() throws Exception {
         FreeStyleProject project = j.createFreeStyleProject("project");
 
         final CLICommandInvoker.Result result = command
                 .authorizedTo(Jenkins.READ, Item.READ, Item.CONFIGURE)
-                .invokeWithArgs("project", "42")
-        ;
+                .invokeWithArgs("project", "42");
 
         FreeStyleBuild build = project.scheduleBuild2(0).get();
 
-        assertThat("No error output expected", result.stderr(), isEmptyString());
+        assertThat("No error output expected", result.stderr(), is(emptyString()));
         assertThat(build.number, equalTo(42));
         assertThat("Command is expected to succeed", result.returnCode(), equalTo(0));
     }
