@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletException;
 
 import com.cloudbees.hudson.plugins.folder.computed.ComputedFolder;
 
@@ -39,8 +39,8 @@ import hudson.security.Permission;
 import jenkins.branch.MultiBranchProject;
 import jenkins.model.TransientActionFactory;
 import net.sf.json.JSONException;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.StaplerRequest2;
+import org.kohsuke.stapler.StaplerResponse2;
 
 /**
  *
@@ -108,7 +108,7 @@ public class NextBuildNumberAction implements Action {
         return Job.CONFIGURE;
     }
 
-    public synchronized void doSubmit( StaplerRequest req, StaplerResponse resp ) throws IOException, ServletException {
+    public synchronized void doSubmit( StaplerRequest2 req, StaplerResponse2 resp ) throws IOException, ServletException {
         checkPermission(job);
         try {
             int buildNumber = req.getSubmittedForm().getInt("nextBuildNumber");
